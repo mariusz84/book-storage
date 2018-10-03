@@ -1,0 +1,41 @@
+spring:
+    application:
+        name: Books Storage
+    data:
+          mongodb.host: localhost
+          mongodb.port: 27017
+          mongodb.uri: mongodb://localhost/data
+          mongo.repositories.enabled: true
+server:
+  port: 8093
+
+logging:
+  file: logs/book-storage.log
+
+management:
+  context-path: /-system
+  port: 8094
+  security:
+    enabled: false
+
+endpoints:
+  health:
+    sensitive: false
+  info:
+    sensitive: false
+
+httpClients:
+  booksService:
+    auth:
+      enabled: true
+      credentials:
+        login: admin
+        password: admin1
+
+penguin-books:
+  endpoint:
+   resources: https://reststop.randomhouse.com/resources
+   ping: https://reststop.randomhouse.com
+
+ip-geolocation:
+  endpoint: https://api.ipgeolocation.io
