@@ -2,6 +2,8 @@ package api.dto;
 
 import com.google.common.base.MoreObjects;
 
+import java.util.Objects;
+
 public class BooksSpecificationDto {
     private final String authorFirstName;
     private final String authorLastName;
@@ -39,6 +41,22 @@ public class BooksSpecificationDto {
                 .add("bookTitle", bookTitle)
                 .add("onSaleDate", onSaleDate)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BooksSpecificationDto that = (BooksSpecificationDto) o;
+        return Objects.equals(authorFirstName, that.authorFirstName) &&
+                Objects.equals(authorLastName, that.authorLastName) &&
+                Objects.equals(bookTitle, that.bookTitle) &&
+                Objects.equals(onSaleDate, that.onSaleDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(authorFirstName, authorLastName, bookTitle, onSaleDate);
     }
 
     public static Builder builder() {

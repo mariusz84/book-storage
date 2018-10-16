@@ -39,3 +39,6 @@ penguin-books:
 
 ip-geolocation:
   endpoint: https://api.ipgeolocation.io
+
+location:
+  result-page: https://localhost:8093/books/results

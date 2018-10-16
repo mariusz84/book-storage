@@ -26,15 +26,13 @@ public class OperationsOnDb {
     private PenguinWorksClient penguinWorksClient;
 
     public void writeBookToDbIfAuthorDoesNotExist(final String firstName, final String lastName) {
-        if (!checkIfAuthorExists(firstName, lastName)) {
-            Authors authors = penguinAuthorsClient.getPenguinAuthor(firstName, lastName);
-            List<String> workIds = authors.getAuthor().getWorks().getWorks();
-            workIds.forEach(workId -> {
-                Work work = penguinWorksClient.getPenguinBook(workId);
-                booksRepository.save(new Books(authors.getAuthor().getAuthorfirst(), authors.getAuthor().getAuthorlast(),
-                        work.getTitleweb(), work.getOnsaledate()));
-            });
-        }
+        Authors authors = penguinAuthorsClient.getPenguinAuthor(firstName, lastName);
+        List<String> workIds = authors.getAuthor().getWorks().getWorks();
+        workIds.forEach(workId -> {
+            Work work = penguinWorksClient.getPenguinBook(workId);
+            booksRepository.save(new Books(authors.getAuthor().getAuthorfirst(), authors.getAuthor().getAuthorlast(),
+                    work.getTitleweb(), work.getOnsaledate()));
+        });
     }
 
     public List<BooksSpecificationDto> readBooksFromDb(final String firstName, final String lastName) {
@@ -52,12 +50,5 @@ public class OperationsOnDb {
         booksSpecificationDto.setBookTitle(title);
         booksSpecificationDto.setOnSaleDate(onSaleDate);
         return booksSpecificationDto;
-    }
-
-    private Boolean checkIfAuthorExists(final String firstName, final String lastName) {
-        if (0 != booksRepository.findByLastName(lastName).size() && 0 != booksRepository.findByFirstName(firstName).size()) {
-            return true;
-        } else
-            return false;
     }
 }

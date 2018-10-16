@@ -1,5 +1,7 @@
 package infra.dto;
 
+import java.util.Objects;
+
 public class BooksSpecificationDto {
     private String authorFirstName;
     private String authorLastName;
@@ -36,5 +38,21 @@ public class BooksSpecificationDto {
 
     public void setOnSaleDate(String onSaleDate) {
         this.onSaleDate = onSaleDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BooksSpecificationDto that = (BooksSpecificationDto) o;
+        return Objects.equals(authorFirstName, that.authorFirstName) &&
+                Objects.equals(authorLastName, that.authorLastName) &&
+                Objects.equals(bookTitle, that.bookTitle) &&
+                Objects.equals(onSaleDate, that.onSaleDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(authorFirstName, authorLastName, bookTitle, onSaleDate);
     }
 }

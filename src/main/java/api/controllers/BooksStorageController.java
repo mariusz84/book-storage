@@ -1,5 +1,6 @@
 package api.controllers;
 
+import api.config.LocationConfig;
 import api.error.exceptions.BookUnavailableException;
 import infra.data.mongodb.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import services.health.PenguinHealthCheckService;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import java.net.URI;
 import java.util.List;
 
 import static org.springframework.http.MediaType.valueOf;
@@ -30,6 +32,9 @@ public class BooksStorageController {
     @Autowired
     private BooksRepository booksRepository;
 
+    @Autowired
+    private LocationConfig locationConfig;
+
     public BooksStorageController(final BookService bookService, final BookSpecificationDtoMapper bookSpecificationDtoMapper, final PenguinHealthCheckService penguinHealthCheckService) {
         this.bookService = bookService;
         this.bookSpecificationDtoMapper = bookSpecificationDtoMapper;
@@ -45,6 +50,7 @@ public class BooksStorageController {
             bookService.saveBooksForGivenAuthor(firstName, lastName);
             return new ResponseEntity(responseHeaders, HttpStatus.CREATED);
         } else {
+            responseHeaders.setLocation(getLocationUrl(firstName, lastName));
             return new ResponseEntity(responseHeaders, HttpStatus.FOUND);
         }
     }
@@ -59,14 +65,15 @@ public class BooksStorageController {
         if (checkIfAuthorExists(firstName, lastName)) {
             return new ResponseEntity(bookSpecificationDtoMapper.fromBookSpecification(bookSpecifications), responseHeaders, HttpStatus.OK);
         } else {
-            throw new BookUnavailableException("Books written by " + firstName + " " + lastName+ " do not exist in Store");
+            throw new BookUnavailableException("Books written by " + firstName + " " + lastName + " do not exist in Store");
         }
     }
 
     private Boolean checkIfAuthorExists(final String firstName, final String lastName) {
-        if (0 != booksRepository.findByLastName(lastName).size() || 0 != booksRepository.findByFirstName(firstName).size()) {
-            return true;
-        } else
-            return false;
+        return 0 != booksRepository.findByLastName(lastName).size() || 0 != booksRepository.findByFirstName(firstName).size();
+    }
+
+    private URI getLocationUrl(String firstName, String lastName) {
+        return URI.create(locationConfig.getLocation() + "/" + firstName + "/" + lastName);
     }
 }
