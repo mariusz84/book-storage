@@ -69,11 +69,11 @@ public class BooksStorageController {
         }
     }
 
-    private Boolean checkIfAuthorExists(final String firstName, final String lastName) {
+    Boolean checkIfAuthorExists(final String firstName, final String lastName) {
         return 0 != booksRepository.findByLastName(lastName).size() || 0 != booksRepository.findByFirstName(firstName).size();
     }
 
-    private URI getLocationUrl(String firstName, String lastName) {
+    URI getLocationUrl(String firstName, String lastName) {
         return URI.create(locationConfig.getLocation() + "/" + firstName + "/" + lastName);
     }
 }
