@@ -9,6 +9,10 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BooksSpecificationDtoTest {
+    private String firstName = "John";
+    private String lastName = "Smith";
+    private String bookTitle = "Away";
+    private String onSaleDate = "2015-03-04";
 
     @Test
     public void shouldCheckEqualsAndHashCode() {
@@ -29,11 +33,6 @@ public class BooksSpecificationDtoTest {
 
     @Test
     public void shouldCreateFullObjectViaBuilder() {
-        String firstName = "John";
-        String lastName = "Smith";
-        String bookTitle = "Away";
-        String onSaleDate = "2015-03-04";
-
         BooksSpecificationDto booksSpecificationDto = BooksSpecificationDto.builder()
                 .authorFirstName(firstName).authorLastName(lastName).bookTitle(bookTitle)
                 .onSaleDate(onSaleDate).build();
@@ -43,5 +42,15 @@ public class BooksSpecificationDtoTest {
         assertThat(booksSpecificationDto.getAuthorLastName(), equalTo(lastName));
         assertThat(booksSpecificationDto.getBookTitle(), equalTo(bookTitle));
         assertThat(booksSpecificationDto.getOnSaleDate(), equalTo(onSaleDate));
+    }
+
+    @Test
+    public void shouldCheckToString() {
+        BooksSpecificationDto bookSpecification = BooksSpecificationDto.builder()
+                .authorFirstName(firstName).authorLastName(lastName).bookTitle(bookTitle)
+                .onSaleDate(onSaleDate).build();
+
+        String bookSpecificationValue = "BooksSpecificationDto{authorFirstName=John, authorLastName=Smith, bookTitle=Away, onSaleDate=2015-03-04}";
+        assertThat(bookSpecification.toString(), equalTo(bookSpecificationValue));
     }
 }

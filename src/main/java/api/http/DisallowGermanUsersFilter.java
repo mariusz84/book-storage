@@ -1,6 +1,7 @@
 package api.http;
 
 import api.error.exceptions.ForbiddenResourceException;
+import com.google.common.annotations.VisibleForTesting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class DisallowGermanUsersFilter extends GenericFilterBean {
         }
     }
 
-    private String getIpAddress() {
+    @VisibleForTesting
+    String getIpAddress() {
         String ipAddress = "";
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
