@@ -7,14 +7,14 @@ spring:
           mongodb.uri: mongodb://localhost/data
           mongo.repositories.enabled: true
 server:
-  port: 8093
+  port: 8096
 
 logging:
   file: logs/book-storage.log
 
 management:
   context-path: /-system
-  port: 8094
+  port: 8096
   security:
     enabled: false
 
