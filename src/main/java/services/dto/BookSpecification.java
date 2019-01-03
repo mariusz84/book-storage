@@ -4,7 +4,7 @@ import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
 
-public class BookSpecification {
+public final class BookSpecification {
     private final String authorFirstName;
     private final String authorLastName;
     private final String bookTitle;

@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class PenguinHealthCheck {
     private static final Logger log = LoggerFactory.getLogger(PenguinHealthCheck.class);
+    private HttpStatus httpStatus;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -24,7 +25,6 @@ public class PenguinHealthCheck {
     }
 
     public Status checkHealth() {
-        HttpStatus httpStatus = null;
         try {
             httpStatus = restTemplate.getForEntity(uriProvider.getPenguinBooksPingEndpoint(), String.class).getStatusCode();
         } catch (RestClientException restClientException) {
