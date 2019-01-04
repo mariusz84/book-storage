@@ -7,13 +7,13 @@ import infra.data.mongodb.Books;
 import infra.data.mongodb.BooksRepository;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -144,14 +144,15 @@ public class BooksStorageControllerIntTest {
         resultActions.andExpect(status().isOk());
     }
 
-//    @WithMockUser(value = "admin")
-//    @Test(expected = BookUnavailableException.class)
-//    public void shouldThrowBookUnavailableExceptionOnGettingBookSpecificationIfBookDoesNotExist() throws Exception {
-//        when(booksRepository.findByFirstName(firstName)).thenReturn(emptyBooksList);
-//        when(booksRepository.findByLastName(lastName)).thenReturn(emptyBooksList);
-//        when(bookService.readBookSpecification(firstName, lastName)).thenReturn(listOfBooksReturnedByBookService);
-//
-//        mvc.perform(MockMvcRequestBuilders.get(SERVICE_ENDPOINT).param("firstName", firstName)
-//                .param("lastName", lastName).contentType(APPLICATION_JSON_TYPE));
-//    }
+    @Ignore
+    @WithMockUser(value = "admin")
+    @Test(expected = BookUnavailableException.class)
+    public void shouldThrowBookUnavailableExceptionOnGettingBookSpecificationIfBookDoesNotExist() throws Exception {
+        when(booksRepository.findByFirstName(firstName)).thenReturn(emptyBooksList);
+        when(booksRepository.findByLastName(lastName)).thenReturn(emptyBooksList);
+        when(bookService.readBookSpecification(firstName, lastName)).thenReturn(listOfBooksReturnedByBookService);
+
+        mvc.perform(MockMvcRequestBuilders.get(SERVICE_ENDPOINT).param("firstName", firstName)
+                .param("lastName", lastName).contentType(APPLICATION_JSON_TYPE));
+    }
 }
