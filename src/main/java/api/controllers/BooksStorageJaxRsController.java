@@ -43,7 +43,7 @@ public class BooksStorageJaxRsController {
             bookService.saveBooksForGivenAuthor(firstName, lastName);
             return Response.status(Response.Status.CREATED).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).build();
         } else {
-            return Response.status(Response.Status.MOVED_PERMANENTLY).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).location(getLocationUrl(firstName, lastName)).build();
+            return Response.status(Response.Status.FOUND).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).location(getLocationUrl(firstName, lastName)).build();
         }
     }
 
