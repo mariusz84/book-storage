@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/resources/books")
+@Path("/jax/resources/books")
 @Produces(MediaType.APPLICATION_JSON)
 public class BooksStorageJaxRsController {
     private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json;charset=UTF-8";
@@ -43,7 +43,7 @@ public class BooksStorageJaxRsController {
             bookService.saveBooksForGivenAuthor(firstName, lastName);
             return Response.status(Response.Status.CREATED).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).build();
         } else {
-            return Response.status(Response.Status.FOUND).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).location(getLocationUrl(firstName, lastName)).build();
+            return Response.status(Response.Status.MOVED_PERMANENTLY).header(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8).location(getLocationUrl(firstName, lastName)).build();
         }
     }
 

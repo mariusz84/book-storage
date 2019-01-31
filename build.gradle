@@ -48,10 +48,9 @@ dependencies {
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
-    testCompile 'org.glassfish.jersey.core:jersey-common:2.22.2'
-    compile group: 'org.glassfish.mq', name: 'jms', version: '4.5.2'
     compile group: 'org.springframework', name: 'spring-jms'
-    compile group: 'javax.jms', name: 'javax.jms-api', version: '2.0.1'
+    compile group: 'org.apache.activemq', name: 'activemq-broker'
+    compile group: 'org.apache.activemq', name: 'activemq-kahadb-store'
 }
 
 jar {

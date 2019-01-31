@@ -6,6 +6,13 @@ spring:
           mongodb.port: 27017
           mongodb.uri: mongodb://localhost/data
           mongo.repositories.enabled: true
+    activemq:
+          pool:
+            enabled: false
+          broker-url: vm://localhost
+          user: admin
+          password: admin
+
 server:
   port: 8096
 
@@ -14,7 +21,7 @@ logging:
 
 management:
   context-path: /-system
-  port: 8096
+  port: 8097
   security:
     enabled: false
 
