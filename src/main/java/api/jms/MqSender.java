@@ -33,5 +33,6 @@ public class MqSender {
                 log.info(e.getMessage());
             }
         });
+        executor.shutdown();
     }
 }
