@@ -12,7 +12,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-task sourceJar(type: Jar) {
+task sourceJar(type: War) {
     from sourceSets.main.allJava
     from sourceSets.test.allJava
 }
@@ -48,7 +48,9 @@ dependencies {
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
-    testCompile 'org.glassfish.jersey.core:jersey-common:2.22.2'
+    compile group: 'org.springframework', name: 'spring-jms'
+    compile group: 'org.apache.activemq', name: 'activemq-broker'
+    compile group: 'org.apache.activemq', name: 'activemq-kahadb-store'
 }
 
 jar {

@@ -5,13 +5,16 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.jms.annotation.EnableJms;
 
 @SpringBootApplication
 @ComponentScan({"api", "services", "infra"})
 @EnableMongoRepositories(basePackageClasses = BooksRepository.class)
 @EnableAutoConfiguration()
 @VisibleForTesting
+@EnableJms
 public class BookStorageApplication {
+
     public static void main(final String[] args) {
         SpringApplication.run(BookStorageApplication.class, args);
     }

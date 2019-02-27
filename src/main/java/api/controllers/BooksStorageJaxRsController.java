@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/resources/books")
+@Path("/jax/resources/books")
 @Produces(MediaType.APPLICATION_JSON)
 public class BooksStorageJaxRsController {
     private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json;charset=UTF-8";

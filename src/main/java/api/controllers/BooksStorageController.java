@@ -2,6 +2,7 @@ package api.controllers;
 
 import api.config.LocationConfig;
 import api.error.exceptions.BookUnavailableException;
+import api.jms.MqSender;
 import com.google.common.annotations.VisibleForTesting;
 import infra.data.mongodb.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class BooksStorageController {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setContentType(valueOf(APPLICATION_JSON_CHARSET_UTF_8));
         if (!checkIfAuthorExists(firstName, lastName)) {
+            MqSender.sendMessage(firstName, lastName);
             bookService.saveBooksForGivenAuthor(firstName, lastName);
             return new ResponseEntity(responseHeaders, HttpStatus.CREATED);
         } else {
